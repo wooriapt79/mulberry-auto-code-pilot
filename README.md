@@ -8,3 +8,8 @@
   <img src="./docs/mulberry_team.png">
 </p>
 
+
+---
+
+> **One Team. One Flow. One Spirit. 🌿**  
+> Mulberry Research Lab | Auto Code Pilot v0.1
