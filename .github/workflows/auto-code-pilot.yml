@@ -1,0 +1,33 @@
+name: Auto Code Pilot
+
+on:
+  issues:
+      types: [labeled]
+
+      jobs:
+        auto-code:
+            if: github.event.label.name == 'auto-code-pilot'
+                runs-on: ubuntu-latest
+
+                    steps:
+                          - name: Checkout repository
+                                  uses: actions/checkout@v4
+
+                                        - name: Setup Python
+                                                uses: actions/setup-python@v5
+                                                        with:
+                                                                  python-version: '3.11'
+
+                                                                        - name: Install dependencies
+                                                                                run: |
+                                                                                          pip install anthropic requests
+
+                                                                                                - name: Run Auto Code Runner
+                                                                                                        env:
+                                                                                                                  ANTHROPIC_API_KEY: ${{ vars.ANTHROPIC_API_KEY_V3 }}
+                                                                                                                            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                                                                                                                                      ISSUE_NUMBER: ${{ github.event.issue.number }}
+                                                                                                                                                ISSUE_TITLE: ${{ github.event.issue.title }}
+                                                                                                                                                          ISSUE_BODY: ${{ github.event.issue.body }}
+                                                                                                                                                                    REPO_FULL: ${{ github.repository }}
+                                                                                                                                                                            run: python scripts/auto_code_runner.py
